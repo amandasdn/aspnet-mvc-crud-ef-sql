@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DbProdutosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DbEstudo_Produtos.dbo.tb_categoria' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tb_categoria">
+          <Key>
+            <PropertyRef Name="id_categoria" />
+            <PropertyRef Name="nome" />
+            <PropertyRef Name="datacadastro" />
+          </Key>
+          <Property Name="id_categoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="datacadastro" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DbEstudo_Produtos.dbo.tb_produto' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tb_produto">
+          <Key>
+            <PropertyRef Name="id_produto" />
+            <PropertyRef Name="nome" />
+            <PropertyRef Name="descricao" />
+            <PropertyRef Name="imagem" />
+            <PropertyRef Name="datacadastro" />
+            <PropertyRef Name="id_categoria" />
+          </Key>
+          <Property Name="id_produto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="descricao" Type="varchar" MaxLength="2000" Nullable="false" />
+          <Property Name="imagem" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="datacadastro" Type="datetime" Nullable="false" />
+          <Property Name="id_categoria" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DbProdutosModelStoreContainer">
+          <EntitySet Name="tb_categoria" EntityType="Self.tb_categoria" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tb_categoria].[id_categoria] AS [id_categoria], 
+    [tb_categoria].[nome] AS [nome], 
+    [tb_categoria].[datacadastro] AS [datacadastro]
+    FROM [dbo].[tb_categoria] AS [tb_categoria]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tb_produto" EntityType="Self.tb_produto" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tb_produto].[id_produto] AS [id_produto], 
+    [tb_produto].[nome] AS [nome], 
+    [tb_produto].[descricao] AS [descricao], 
+    [tb_produto].[imagem] AS [imagem], 
+    [tb_produto].[datacadastro] AS [datacadastro], 
+    [tb_produto].[id_categoria] AS [id_categoria]
+    FROM [dbo].[tb_produto] AS [tb_produto]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DbProdutosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_categoria">
+          <Key>
+            <PropertyRef Name="id_categoria" />
+            <PropertyRef Name="nome" />
+            <PropertyRef Name="datacadastro" />
+          </Key>
+          <Property Name="id_categoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="datacadastro" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="tb_produto">
+          <Key>
+            <PropertyRef Name="id_produto" />
+            <PropertyRef Name="nome" />
+            <PropertyRef Name="descricao" />
+            <PropertyRef Name="imagem" />
+            <PropertyRef Name="datacadastro" />
+            <PropertyRef Name="id_categoria" />
+          </Key>
+          <Property Name="id_produto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descricao" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="imagem" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="datacadastro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="id_categoria" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DbProdutosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_categoria" EntityType="Self.tb_categoria" />
+          <EntitySet Name="tb_produto" EntityType="Self.tb_produto" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DbProdutosModelStoreContainer" CdmEntityContainer="DbProdutosEntities">
+          <EntitySetMapping Name="tb_categoria">
+            <EntityTypeMapping TypeName="DbProdutosModel.tb_categoria">
+              <MappingFragment StoreEntitySet="tb_categoria">
+                <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="datacadastro" ColumnName="datacadastro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_produto">
+            <EntityTypeMapping TypeName="DbProdutosModel.tb_produto">
+              <MappingFragment StoreEntitySet="tb_produto">
+                <ScalarProperty Name="id_produto" ColumnName="id_produto" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="imagem" ColumnName="imagem" />
+                <ScalarProperty Name="datacadastro" ColumnName="datacadastro" />
+                <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
