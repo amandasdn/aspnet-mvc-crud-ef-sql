@@ -1,2 +1,5 @@
-# ASPNET_MVC_CRUD_EF_SQL
-Painel administrativo simples com login de acesso e gerenciamento de usuários (CRUD), utilizando a estrutura MVC do ASP.NET com a ORM Entity Framework e SQL Server.
+# CRUD em ASP.NET MVC 5 + Entity Framework + SQL Server
+
+Painel administrativo simples para o gerenciamento de produtos (CRUD), utilizando a estrutura MVC do ASP.NET com a ORM Entity Framework e um banco previamente criado no SQL Server.
+
+Mais em: https://github.com/amandasdn
