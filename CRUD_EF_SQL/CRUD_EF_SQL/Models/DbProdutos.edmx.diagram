@@ -5,8 +5,8 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="b0fc61fbe4c240b1afeb32d898ea5947" Name="Diagram1">
-        <EntityTypeShape EntityType="DbProdutosModel.tb_categoria" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DbProdutosModel.tb_produto" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbProdutosModel.Categoria" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DbProdutosModel.Produto" Width="1.5" PointX="2.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

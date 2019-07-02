@@ -16,7 +16,7 @@ namespace CRUD_EF_SQL
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Loja", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

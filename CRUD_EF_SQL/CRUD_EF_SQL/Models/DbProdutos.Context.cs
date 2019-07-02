@@ -25,7 +25,7 @@ namespace CRUD_EF_SQL.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tb_categoria> tb_categoria { get; set; }
-        public virtual DbSet<tb_produto> tb_produto { get; set; }
+        public virtual DbSet<Categoria> Categoria { get; set; }
+        public virtual DbSet<Produto> Produto { get; set; }
     }
 }

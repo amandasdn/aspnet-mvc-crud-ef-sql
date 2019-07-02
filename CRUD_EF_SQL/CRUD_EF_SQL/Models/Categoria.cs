@@ -12,13 +12,10 @@ namespace CRUD_EF_SQL.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_produto
+    public partial class Categoria
     {
-        public int id_produto { get; set; }
-        public string nome { get; set; }
-        public string descricao { get; set; }
-        public string imagem { get; set; }
-        public System.DateTime datacadastro { get; set; }
         public int id_categoria { get; set; }
+        public string nome { get; set; }
+        public System.DateTime datacadastro { get; set; }
     }
 }

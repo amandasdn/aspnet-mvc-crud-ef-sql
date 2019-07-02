@@ -4,10 +4,10 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DbProdutosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DbProdutosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DbEstudo_Produtos.dbo.tb_categoria' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="tb_categoria">
+warning 6002: The table/view 'DbEstudo_Produtos.dbo.Categoria' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Categoria">
           <Key>
             <PropertyRef Name="id_categoria" />
             <PropertyRef Name="nome" />
@@ -18,8 +18,8 @@ warning 6002: The table/view 'DbEstudo_Produtos.dbo.tb_categoria' does not have 
           <Property Name="datacadastro" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DbEstudo_Produtos.dbo.tb_produto' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="tb_produto">
+warning 6002: The table/view 'DbEstudo_Produtos.dbo.Produto' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Produto">
           <Key>
             <PropertyRef Name="id_produto" />
             <PropertyRef Name="nome" />
@@ -36,40 +36,43 @@ warning 6002: The table/view 'DbEstudo_Produtos.dbo.tb_produto' does not have a 
           <Property Name="id_categoria" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="DbProdutosModelStoreContainer">
-          <EntitySet Name="tb_categoria" EntityType="Self.tb_categoria" store:Type="Tables" store:Schema="dbo">
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [tb_categoria].[id_categoria] AS [id_categoria], 
-    [tb_categoria].[nome] AS [nome], 
-    [tb_categoria].[datacadastro] AS [datacadastro]
-    FROM [dbo].[tb_categoria] AS [tb_categoria]</DefiningQuery>
+    [Categoria].[id_categoria] AS [id_categoria], 
+    [Categoria].[nome] AS [nome], 
+    [Categoria].[datacadastro] AS [datacadastro]
+    FROM [dbo].[Categoria] AS [Categoria]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="tb_produto" EntityType="Self.tb_produto" store:Type="Tables" store:Schema="dbo">
+          <EntitySet Name="Produto" EntityType="Self.Produto" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [tb_produto].[id_produto] AS [id_produto], 
-    [tb_produto].[nome] AS [nome], 
-    [tb_produto].[descricao] AS [descricao], 
-    [tb_produto].[imagem] AS [imagem], 
-    [tb_produto].[datacadastro] AS [datacadastro], 
-    [tb_produto].[id_categoria] AS [id_categoria]
-    FROM [dbo].[tb_produto] AS [tb_produto]</DefiningQuery>
+    [Produto].[id_produto] AS [id_produto], 
+    [Produto].[nome] AS [nome], 
+    [Produto].[descricao] AS [descricao], 
+    [Produto].[imagem] AS [imagem], 
+    [Produto].[datacadastro] AS [datacadastro], 
+    [Produto].[id_categoria] AS [id_categoria]
+    FROM [dbo].[Produto] AS [Produto]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DbProdutosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="tb_categoria">
+        <EntityContainer Name="DbProdutosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categoria" EntityType="DbProdutosModel.Categoria" />
+          <EntitySet Name="Produto" EntityType="DbProdutosModel.Produto" />
+        </EntityContainer>
+        <EntityType Name="Categoria">
           <Key>
             <PropertyRef Name="id_categoria" />
             <PropertyRef Name="nome" />
             <PropertyRef Name="datacadastro" />
           </Key>
           <Property Name="id_categoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nome" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nome" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="datacadastro" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <EntityType Name="tb_produto">
+        <EntityType Name="Produto">
           <Key>
             <PropertyRef Name="id_produto" />
             <PropertyRef Name="nome" />
@@ -79,40 +82,36 @@ warning 6002: The table/view 'DbEstudo_Produtos.dbo.tb_produto' does not have a 
             <PropertyRef Name="id_categoria" />
           </Key>
           <Property Name="id_produto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="descricao" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="imagem" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nome" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="descricao" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="imagem" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="datacadastro" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="id_categoria" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="DbProdutosEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tb_categoria" EntityType="Self.tb_categoria" />
-          <EntitySet Name="tb_produto" EntityType="Self.tb_produto" />
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DbProdutosModelStoreContainer" CdmEntityContainer="DbProdutosEntities">
-          <EntitySetMapping Name="tb_categoria">
-            <EntityTypeMapping TypeName="DbProdutosModel.tb_categoria">
-              <MappingFragment StoreEntitySet="tb_categoria">
-                <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
-                <ScalarProperty Name="nome" ColumnName="nome" />
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="DbProdutosModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
                 <ScalarProperty Name="datacadastro" ColumnName="datacadastro" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tb_produto">
-            <EntityTypeMapping TypeName="DbProdutosModel.tb_produto">
-              <MappingFragment StoreEntitySet="tb_produto">
-                <ScalarProperty Name="id_produto" ColumnName="id_produto" />
-                <ScalarProperty Name="nome" ColumnName="nome" />
-                <ScalarProperty Name="descricao" ColumnName="descricao" />
-                <ScalarProperty Name="imagem" ColumnName="imagem" />
-                <ScalarProperty Name="datacadastro" ColumnName="datacadastro" />
+          <EntitySetMapping Name="Produto">
+            <EntityTypeMapping TypeName="DbProdutosModel.Produto">
+              <MappingFragment StoreEntitySet="Produto">
                 <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
+                <ScalarProperty Name="datacadastro" ColumnName="datacadastro" />
+                <ScalarProperty Name="imagem" ColumnName="imagem" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="id_produto" ColumnName="id_produto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
