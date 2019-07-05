@@ -1,0 +1,63 @@
+﻿@model CRUD_EF_SQL.Models.Categoria
+
+@{
+    ViewBag.Title = "Dados da Categoria " + Model.nome;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="conteudo">
+
+    <div class="col-md-12 topo">
+        <h1 class="col-md-8">Dados da Categoria: @Html.DisplayFor(x => x.nome)</h1>
+        <div class="col-md-4 links">
+            @Html.ActionLink("Editar", "Editar", new { id = Model.id_categoria }, new { @class = "btn btn-warning mr-10" })
+            @Html.ActionLink("Excluir", "Excluir", new { id = Model.id_categoria }, new { @class = "btn btn-danger" })
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="box">
+
+        <table class="table mb-0">
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.id_categoria)
+                </td>
+                <td>
+                    #@Html.DisplayFor(model => model.id_categoria)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.nome)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.datacadastro)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.datacadastro)
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+    @Html.ActionLink("Voltar para a Lista", "Lista", null, new { @class = "btn btn-primary" })
+
+
+</div>
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $(".btn-aside-categorias").addClass(" active");
+        });
+    </script>
+}

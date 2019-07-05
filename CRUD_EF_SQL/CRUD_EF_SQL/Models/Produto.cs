@@ -20,5 +20,7 @@ namespace CRUD_EF_SQL.Models
         public string imagem { get; set; }
         public System.DateTime datacadastro { get; set; }
         public int id_categoria { get; set; }
+    
+        public virtual Categoria Categoria { get; set; }
     }
 }

@@ -1,0 +1,41 @@
+﻿@model CRUD_EF_SQL.Models.Categoria
+
+@{
+    ViewBag.Title = "Criar Categoria";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="conteudo">
+
+    <div class="col-md-12 topo">
+        <h1 class="col-md-8">Criar Categoria</h1>
+    </div>
+
+    <div class="clearfix"></div>
+
+    @using (Html.BeginForm())
+    {
+
+        <div class="box">
+
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group mb-0">
+                    @Html.LabelFor(model => model.nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.nome, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.nome, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <input type="submit" value="Salvar" class="btn btn-success mr-15" />
+        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-primary" })
+
+    }
+
+</div>

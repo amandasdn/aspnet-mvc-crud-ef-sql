@@ -5,28 +5,17 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DbProdutosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DbEstudo_Produtos.dbo.Categoria' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Categoria">
           <Key>
             <PropertyRef Name="id_categoria" />
-            <PropertyRef Name="nome" />
-            <PropertyRef Name="datacadastro" />
           </Key>
           <Property Name="id_categoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nome" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="datacadastro" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DbEstudo_Produtos.dbo.Produto' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Produto">
           <Key>
             <PropertyRef Name="id_produto" />
-            <PropertyRef Name="nome" />
-            <PropertyRef Name="descricao" />
-            <PropertyRef Name="imagem" />
-            <PropertyRef Name="datacadastro" />
-            <PropertyRef Name="id_categoria" />
           </Key>
           <Property Name="id_produto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nome" Type="varchar" MaxLength="100" Nullable="false" />
@@ -35,24 +24,25 @@ warning 6002: The table/view 'DbEstudo_Produtos.dbo.Produto' does not have a pri
           <Property Name="datacadastro" Type="datetime" Nullable="false" />
           <Property Name="id_categoria" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_IDCategoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="id_categoria" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="id_categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DbProdutosModelStoreContainer">
-          <EntitySet Name="Categoria" EntityType="Self.Categoria" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Categoria].[id_categoria] AS [id_categoria], 
-    [Categoria].[nome] AS [nome], 
-    [Categoria].[datacadastro] AS [datacadastro]
-    FROM [dbo].[Categoria] AS [Categoria]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Produto" EntityType="Self.Produto" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Produto].[id_produto] AS [id_produto], 
-    [Produto].[nome] AS [nome], 
-    [Produto].[descricao] AS [descricao], 
-    [Produto].[imagem] AS [imagem], 
-    [Produto].[datacadastro] AS [datacadastro], 
-    [Produto].[id_categoria] AS [id_categoria]
-    FROM [dbo].[Produto] AS [Produto]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produto" EntityType="Self.Produto" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_IDCategoria" Association="Self.FK_IDCategoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Produto" EntitySet="Produto" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -61,25 +51,23 @@ warning 6002: The table/view 'DbEstudo_Produtos.dbo.Produto' does not have a pri
         <EntityContainer Name="DbProdutosEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categoria" EntityType="DbProdutosModel.Categoria" />
           <EntitySet Name="Produto" EntityType="DbProdutosModel.Produto" />
+          <AssociationSet Name="FK_IDCategoria" Association="DbProdutosModel.FK_IDCategoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Produto" EntitySet="Produto" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Categoria">
           <Key>
             <PropertyRef Name="id_categoria" />
-            <PropertyRef Name="nome" />
-            <PropertyRef Name="datacadastro" />
           </Key>
           <Property Name="id_categoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nome" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="datacadastro" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Produto" Relationship="DbProdutosModel.FK_IDCategoria" FromRole="Categoria" ToRole="Produto" />
         </EntityType>
         <EntityType Name="Produto">
           <Key>
             <PropertyRef Name="id_produto" />
-            <PropertyRef Name="nome" />
-            <PropertyRef Name="descricao" />
-            <PropertyRef Name="imagem" />
-            <PropertyRef Name="datacadastro" />
-            <PropertyRef Name="id_categoria" />
           </Key>
           <Property Name="id_produto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nome" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -87,7 +75,20 @@ warning 6002: The table/view 'DbEstudo_Produtos.dbo.Produto' does not have a pri
           <Property Name="imagem" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="datacadastro" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="id_categoria" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Categoria" Relationship="DbProdutosModel.FK_IDCategoria" FromRole="Produto" ToRole="Categoria" />
         </EntityType>
+        <Association Name="FK_IDCategoria">
+          <End Type="DbProdutosModel.Categoria" Role="Categoria" Multiplicity="1" />
+          <End Type="DbProdutosModel.Produto" Role="Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="id_categoria" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="id_categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

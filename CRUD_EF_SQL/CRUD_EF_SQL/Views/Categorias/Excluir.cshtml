@@ -1,0 +1,72 @@
+﻿@model CRUD_EF_SQL.Models.Categoria
+
+@{
+    ViewBag.Title = "Dados da Categoria " + Model.nome;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="conteudo">
+
+    <div class="col-md-12 topo">
+        <h1 class="col-md-8">Tem certeza que deseja excluir a categoria @Html.DisplayFor(x => x.nome)?</h1>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="box">
+
+        <table class="table mb-0">
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.id_categoria)
+                </td>
+                <td>
+                    #@Html.DisplayFor(model => model.id_categoria)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.nome)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.datacadastro)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.datacadastro)
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Excluir" class="btn btn-danger mr-10" />
+        @Html.ActionLink("Voltar para a Lista", "Lista", null, new { @class = "btn btn-primary" })
+    </div>
+    }
+
+
+
+
+</div>
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $(".btn-aside-categorias").addClass(" active");
+        });
+    </script>
+}
+
+
+

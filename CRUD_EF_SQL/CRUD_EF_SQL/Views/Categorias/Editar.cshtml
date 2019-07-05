@@ -1,0 +1,53 @@
+﻿@model CRUD_EF_SQL.Models.Categoria
+
+@{
+    ViewBag.Title = "Editar Categoria " + Model.nome;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="conteudo">
+
+    <div class="col-md-12 topo">
+        <h1 class="col-md-8">Editar dados da Categoria</h1>
+    </div>
+
+    <div class="clearfix"></div>
+
+    @using (Html.BeginForm())
+    {
+
+        <div class="box">
+
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.id_categoria)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.nome, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.nome, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group hidden">
+                    @Html.LabelFor(model => model.datacadastro, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.datacadastro, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.datacadastro, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <input type="submit" value="Salvar" class="btn btn-success mr-15" />
+        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-primary" })
+
+    }
+
+</div>

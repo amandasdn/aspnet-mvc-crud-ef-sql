@@ -11,11 +11,32 @@ namespace CRUD_EF_SQL.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Categoria
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Categoria()
+        {
+            this.Produto = new HashSet<Produto>();
+        }
+
+        [Key]
+        [Display(Name = "Código")]
         public int id_categoria { get; set; }
+
+
+        [Required(ErrorMessage = "Digite o nome da categoria.", AllowEmptyStrings = false)]
+        [Display(Name = "Nome da Categoria")]
         public string nome { get; set; }
+
+        [Required]
+        [Display(Name = "Data de Cadastro")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm}", ApplyFormatInEditMode = true)]
         public System.DateTime datacadastro { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Produto> Produto { get; set; }
     }
 }

@@ -18,6 +18,12 @@ namespace CRUD_EF_SQL
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Loja", action = "Index", id = UrlParameter.Optional }
             );
+
+            //routes.MapRoute(
+            //    name: "Categorias",
+            //    url: "Categorias/Nova",
+            //    defaults: new { controller = "Loja", action = "CategoriaNova", id = UrlParameter.Optional }
+            //);
         }
     }
 }
